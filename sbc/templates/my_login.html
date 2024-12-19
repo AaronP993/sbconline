@@ -30,6 +30,7 @@
             max-width: 90%;
             width: 450px;
             color: #fff;
+            margin-left: 380px;
         }
 
         .container h2 {
@@ -82,16 +83,20 @@
         }
 
         .logo-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            text-align: left;
-        }
+    position: absolute; /* Freely positionable */
+   
+    left: 265px; /* Default distance from the left */
+    text-align: left; /* Aligns content */
+    
+}
 
-        .logo {
-            max-width: 250px;
-            height: auto;
-        }
+.logo {
+    max-width: 100%; /* Ensures responsiveness */
+    width: 450px; /* Default width for adjustability */
+    height: auto; /* Maintains aspect ratio */
+    resize: both; /* Allows resizing */
+    overflow: hidden; /* Prevents overflow if resized too small */
+}
 
         .container ul {
             margin-top: 20px;

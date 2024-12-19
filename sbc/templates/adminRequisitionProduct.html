@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisition Product Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #696969;
+            height: 100vh;
+            padding: 10px;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            color: white;
+        }
+
+        .sidebar img {
+            display: block;
+            margin: 10px auto;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            font-weight: bold;
+            border-top: 1px solid #ccc;
+        }
+
+        .sidebar a:hover {
+            color: #ccc;
+        }
+
+        .sidebar a.active {
+            color: #000;
+            
+        }
+
+        .logout {
+            text-align: center;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #333, #000);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            color: #000;
+            margin-left: 5px;
+            width: 100%;
+        }
+
+        /* Table */
+        .table {
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .table thead {
+            background-color: #666;
+            color: #fff;
+        }
+
+        /* Status Badges */
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .approved {
+            background-color: #28a745; /* Green */
+            color: #fff;
+        }
+
+        .pending {
+            background-color: #ffc107; /* Yellow */
+            color: #000;
+        }
+
+        .rejected {
+            background-color: #dc3545; /* Red */
+            color: #fff;
+        }
+
+        /* Action Buttons */
+        /* .action-buttons {
+            display: flex;
+            /* justify-content: center;
+            gap: 10px; */
+
+         /*   justify-content: flex-end;
+            margin-top: 20px;
+        } */
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 280px;
+            margin-left: 820px;
+        }
+        .action-buttons .btn {
+            margin: 5px;
+            padding: 8px 20px;
+        }
+
+        .action-buttons .btn {
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+            /* Buttons */
+            .btn {
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .btn-primary {
+            background-color: #FFFFFF;
+            border: none;
+            color: #000;
+        }
+        .btn-success {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+        .btn-warning {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+        .btn-danger {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="{% static 'shoebros-removebg-preview.png' %}" alt="Logo" width="100" height="100">
+        <p class="text-center">ADMIN</p>
+        <a href="{% url 'adminAccounts' %}">ACCOUNTS</a>
+        <a href="{% url 'adminPurchaseOrder' %}">PURCHASE ORDER</a>
+        <a class="active" href="{% url 'adminRequisitionProduct' %}">REQUISITION</a>
+        <a href="{% url 'adminProductListing' %}">PRODUCT LISTING</a>
+        <a href="{% url 'login' %}" class="logout">LOGOUT</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <h1>Requisition Product Form</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <!-- Filter Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <label for="datePicker" class="text-white">📅 Date:</label>
+                <input type="date" id="datePicker" class="form-control" style="display: inline-block; width: auto;">
+            </div>
+            <div>
+                <label for="statusDropdown" class="text-white">Filter:</label>
+                <select id="statusDropdown" class="form-control" style="display: inline-block; width: auto;">
+                    <option value="all">All</option>
+                    <option value="approved">Approved</option>
+                    <option value="pending">Pending</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <!-- <button class="btn btn-primary">Filter</button> -->
+        </div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Sent by (userid)</th>
+                    <th>Date&Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1717</td>
+                    <td>1</td>
+                    <td>11/22/24 9:30 am</td>
+                    <td><span class="status approved">Approved</span></td>
+                </tr>
+                <tr>
+                    <td>1718</td>
+                    <td>2</td>
+                    <td>11/25/24 10:00 am</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>1719</td>
+                    <td>3</td>
+                    <td>11/29/24 1:00 pm</td>
+                    <td><span class="status rejected">Rejected</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-success">Approved</button>
+            <button class="btn btn-danger">Reject</button>
+            <button class="btn btn-secondary">Add Comments</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,16 +11,28 @@ def my_login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('adminAccounts')
         else:
             messages.error(request, 'Invalid username or password.')
+    
     return render(request, 'my_login.html')
 
 @login_required
-def home_view(request):
-    return render(request, 'home.html')
+def adminAccounts_view(request):
+    return render(request, 'adminAccounts.html')
 
 def logout_view(request):
     logout(request)
     return redirect('login') 
 
+@login_required
+def adminPurchaseOrder_view(request):
+    return render(request, 'adminPurchaseOrder.html')
+
+@login_required
+def adminRequisitionProduct_view(request):
+    return render(request, 'adminRequisitionProduct.html')
+
+@login_required
+def adminProductListing_view(request):
+    return render(request, 'adminProductListing.html')

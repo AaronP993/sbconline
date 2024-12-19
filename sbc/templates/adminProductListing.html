@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #696969;
+            height: 100vh;
+            padding: 10px;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            color: white;
+        }
+
+        .sidebar img {
+            display: block;
+            margin: 10px auto;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            font-weight: bold;
+            border-top: 1px solid #ccc;
+        }
+
+        .sidebar a:hover {
+            color: #ccc;
+        }
+
+        .sidebar a.active {
+            color: #000;
+        
+        }
+
+        .logout {
+            text-align: center;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #333, #000);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            color: #000;
+            margin-left: 5px;
+            width: 100%;
+        }
+
+        /* Table */
+        .table {
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .table thead {
+            background-color: #666;
+            color: #fff;
+        }
+
+        .alert-low {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .action-buttons .btn {
+            margin: 5px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            background-color: #fff;
+            color: #000;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+          /* Action Buttons */
+          .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .action-buttons .btn {
+            margin-left: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 280px;
+            margin-left: 820px;
+        }
+        .action-buttons .btn {
+            margin: 5px;
+            padding: 8px 20px;
+        }
+
+        .action-buttons .btn {
+            border-radius: 20px;
+            font-weight: bold;
+        }
+              /* Buttons */
+              .btn {
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .btn-primary {
+            background-color: #FFFFFF;
+            border: none;
+            color: #000;
+        }
+        .btn-success {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+        .btn-warning {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+        .btn-danger {
+            background-color: #FFFFFF;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="{% static 'shoebros-removebg-preview.png' %}" alt="Logo" width="100" height="100">
+        <p class="text-center">ADMIN</p>
+        <a href="{% url 'adminAccounts' %}">ACCOUNTS</a>
+        <a href="{% url 'adminPurchaseOrder' %}">PURCHASE ORDER</a>
+        <a href="{% url 'adminRequisitionProduct' %}">REQUISITION</a>
+        <a class="active" href="{% url 'adminProductListing' %}">PRODUCT LISTING</a>
+        <a href="{% url 'login' %}" class="logout">LOGOUT</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <h1>Product Listing</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <!-- Filter Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <label for="datePicker" class="text-white">📅 Date:</label>
+                <input type="date" id="datePicker" class="form-control" style="display: inline-block; width: auto;">
+            </div>
+            <button class="btn btn-primary">Filter</button>
+        </div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prod ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Alert</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Jordan</td>
+                    <td>Shoes</td>
+                    <td>3,500</td>
+                    <td>10</td>
+                    <td class="alert-low">Low</td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td>Nike</td>
+                    <td>Socks</td>
+                    <td>300</td>
+                    <td>15</td>
+                    <td class="alert-low">Low</td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td>Vans</td>
+                    <td>Shoes</td>
+                    <td>3,000</td>
+                    <td>60</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-success">Restock</button>
+            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-secondary">Edit</button>
+        </div>
+    </div>
+</body>
+</html>
