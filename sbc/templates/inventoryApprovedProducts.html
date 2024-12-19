@@ -139,10 +139,10 @@
     <div class="sidebar">
         <img src="logo.png" alt="Logo" width="100" height="100">
         <p class="text-center">REQUISITION</p>
-        <a href="#">STOCK</a>
-        <a href="#">REQUISITION</a>
-        <a href="{url %#%}">REQUISITION STATUS</a>
-        <a class='active'  href="#">APPROVED PRODUCTS</a>
+        <a href="{% url 'inventoryStocks' %}">STOCK</a>
+        <a href="{% url 'inventoryRequisition' %}">REQUISITION</a>
+        <a href="{% url 'inventoryRequestStatus' %}">REQUISITION STATUS</a>
+        <a class='active'  href="{% url 'inventoryApprovedProducts' %}">APPROVED PRODUCTS</a>
         <a href="{url %my_login%}" class="logout">LOGOUT</a>
     </div>
 
