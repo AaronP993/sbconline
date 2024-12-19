@@ -11,7 +11,7 @@ def my_login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('inventoryStocks')
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request, 'my_login.html')
@@ -20,7 +20,17 @@ def my_login_view(request):
 def home_view(request):
     return render(request, 'home.html')
 
+@login_required
+def stocks_view(request):
+    return render(request, 'inventoryStocks.html')
+
+@login_required
+def inventory_Requisition_view(request):
+    return render(request, 'inventoryRequisition.html')
+
 def logout_view(request):
     logout(request)
     return redirect('login') 
+
+
 
