@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Shoe Bros Cebu Online | Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoe Bros Cebu Online | Create Account</title>
     <style>
         /* General Reset */
         * {
@@ -22,90 +24,104 @@
             padding: 20px;
         }
 
-        .container {
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
             background-color: #222;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
             padding: 40px;
-            text-align: center;
             max-width: 90%;
-            width: 450px;
-            color: #fff;
-            margin-left: 380px;
+            width: 800px;
         }
 
-        .container h2 {
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .form-container {
+            color: #fff;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-container h2 {
             margin-bottom: 20px;
             font-size: 24px;
             font-weight: bold;
         }
 
-        .container input {
+        .form-container input,
+        .form-container button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .form-container input {
             background-color: #444;
             border: none;
-            border-radius: 5px;
             color: #fff;
         }
 
-        .container input::placeholder {
+        .form-container input::placeholder {
             color: #aaa;
         }
 
-        .container input:focus {
+        .form-container input:focus {
             outline: none;
             box-shadow: 0px 0px 5px #ff4444;
         }
 
-        .container label {
+        .form-container label {
             display: block;
             text-align: left;
             margin-top: 10px;
             font-weight: bold;
         }
 
-        .container button {
-            width: 50%;
-            padding: 10px;
+        .form-container button {
             background-color: #e22d2d;
             color: #fff;
             border: none;
-            border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
             font-weight: bold;
         }
 
-        .container button:hover {
+        .form-container button:hover {
             background-color: #c42020;
         }
 
-        .logo-container {
-    position: absolute; /* Freely positionable */
-   
-    left: 265px; /* Default distance from the left */
-    text-align: left; /* Aligns content */
-    
-}
+        .role-container {
+            text-align: left;
+        }
 
-.logo {
-    max-width: 100%; /* Ensures responsiveness */
-    width: 450px; /* Default width for adjustability */
-    height: auto; /* Maintains aspect ratio */
-    resize: both; /* Allows resizing */
-    overflow: hidden; /* Prevents overflow if resized too small */
-}
+        .role-container input {
+            width: auto;
+            margin-right: 10px;
+        }
 
-        .container ul {
+        .role-container label {
+            display: inline;
+        }
+
+        .messages ul {
             margin-top: 20px;
             list-style: none;
             padding: 0;
         }
 
-        .container li {
+        .messages li {
             background-color: #e22d2d;
             padding: 10px;
             margin-bottom: 10px;
@@ -118,43 +134,45 @@
 
 <body>
     {% load static %}
-    <div class="logo-container">
-        <img src="{% static 'shoebros-removebg-preview.png' %}" alt="Shoe Bros Logo" class="logo">
-    </div>
-    <div class="container">
-        <h2>CREATE ACCOUNT</h2>
-        <form method="post" action="">
-            {% csrf_token %}
-    
-            <label for="username">USERNAME:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-    
-            <label for="password">PASSWORD:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-    
-            <label for="role">ROLE:</label>
-            <div>
-                <input type="radio" id="inventory" name="role" value="inventory" required>
-                <label for="inventory">Inventory</label>
+    <div class="main-container">
+        <div class="logo-container">
+            <img src="{% static 'shoebros-removebg-preview.png' %}" alt="Shoe Bros Logo" class="logo">
+        </div>
+        <div class="form-container">
+            <h2>Create Account</h2>
+            <form method="post" action="">
+                {% csrf_token %}
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                <label for="role">Role:</label>
+                <div class="role-container">
+                    <input type="radio" id="inventory" name="role" value="inventory" required>
+                    <label for="inventory">Inventory</label>
+                    <br>
+                    <input type="radio" id="purchasing" name="role" value="purchasing">
+                    <label for="purchasing">Purchasing</label>
+                    <br>
+                    <input type="radio" id="admin" name="role" value="admin">
+                    <label for="admin">Admin</label>
+                </div>
+
+                <button type="submit">Enter</button>
+            </form>
+            {% if messages %}
+            <div class="messages">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div>
-                <input type="radio" id="purchasing" name="role" value="purchasing">
-                <label for="purchasing">Purchasing</label>
-            </div>
-            <div>
-                <input type="radio" id="admin" name="role" value="admin">
-                <label for="admin">Admin</label>
-            </div>
-    
-            <button type="submit">ENTER</button>
-        </form>
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </body>
 
