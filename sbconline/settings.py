@@ -75,10 +75,14 @@ WSGI_APPLICATION = 'sbconline.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'SIA',
+            'USER':  'postgres',
+            'PASSWORD': '@P1n0t3Aaron993',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
 }
 
 
