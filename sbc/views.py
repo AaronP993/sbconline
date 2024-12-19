@@ -36,3 +36,6 @@ def adminRequisitionProduct_view(request):
 @login_required
 def adminProductListing_view(request):
     return render(request, 'adminProductListing.html')
+
+def adminCreateAccount_view(request):
+    return render(request, 'adminCreateAccount.html')

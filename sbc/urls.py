@@ -10,6 +10,8 @@ urlpatterns = [
     path('adminPurchaseOrder', views.adminPurchaseOrder_view, name='adminPurchaseOrder'),
     path('adminRequisitionProduct', views.adminRequisitionProduct_view, name='adminRequisitionProduct'),
     path('adminProductListing', views.adminProductListing_view, name='adminProductListing'),
+    path('adminCreateAccount', views.adminCreateAccount_view, name='adminCreateAccount'),
+    
 ]
 #aaron.pinote
 #Chellaxxy69
